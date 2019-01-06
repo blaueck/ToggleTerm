@@ -5,10 +5,10 @@
 
 " term program name(e.g, bash, zsh, powershell), if
 " empty, use the default shell option
-let g:term_name = ''
+let g:term_name = get(g:, "term_name", "")
 
 " term height
-let g:term_height = 15
+let g:term_height = get(g:, "term_height", 15)
 
 nnoremap <C-`> :call ToggleTerm#ToggleTerminal()<CR>
 augroup toggle_term
