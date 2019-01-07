@@ -4,7 +4,10 @@ function! g:ToggleTerm#ToggleTerminal()
     let cterm_name = g:term_name
   endif
 
-  let wid = bufwinid('*' . cterm_name) 
+  let wid = -1
+  if exists("t:tab_term_buf_name")
+    let wid = bufwinid(t:tab_term_buf_name)
+  endif
   if wid != -1
     let cid = win_getid()
     if cid == wid
@@ -23,6 +26,7 @@ function! g:ToggleTerm#ToggleTerminal()
       call termopen(cterm_name)
       let t:tab_term_buf_name = bufname("%") 
       let b:is_toggle_term = v:true
+      setlocal nobuflisted
     endif
   endif
 endfunction
