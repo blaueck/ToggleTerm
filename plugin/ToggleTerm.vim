@@ -10,7 +10,8 @@ let g:term_name = get(g:, "term_name", "")
 " term height
 let g:term_height = get(g:, "term_height", 15)
 
-nnoremap <C-`> :call ToggleTerm#ToggleTerminal()<CR>
+nnoremap  <C-`> :call ToggleTerm#ToggleTerminal()<CR>
+tnoremap  <C-`> <C-\><C-N>:call ToggleTerm#ToggleTerminal()<CR>
 augroup toggle_term
   autocmd!
   autocmd TermClose * call ToggleTerm#TerminalCleanUp()

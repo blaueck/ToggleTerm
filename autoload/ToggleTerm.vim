@@ -14,9 +14,10 @@ function! g:ToggleTerm#ToggleTerminal()
       hide
     else
       call win_gotoid(wid)
+      normal i
     endif
   else
-    exec "new"
+    new
     exec "normal \<C-W>J"
     exec "resize " . g:term_height
     if exists("t:tab_term_buf_name")
@@ -28,6 +29,7 @@ function! g:ToggleTerm#ToggleTerminal()
       let b:is_toggle_term = v:true
       setlocal nobuflisted
     endif
+    normal i
   endif
 endfunction
 
