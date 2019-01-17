@@ -24,7 +24,7 @@ function! g:ToggleTerm#ToggleTerminal()
       let bn = bufnr(t:tab_term_buf_name)
       exec "buffer " . bn
     else
-      call termopen(cterm_name)
+      let t:tab_term_job_id = termopen(cterm_name)
       let t:tab_term_buf_name = bufname("%") 
       let b:is_toggle_term = v:true
       setlocal nobuflisted
@@ -36,5 +36,16 @@ endfunction
 function! g:ToggleTerm#TerminalCleanUp()
   if exists("b:is_toggle_term")
     unlet t:tab_term_buf_name
+    unlet t:tab_term_job_id
   endif
+endfunction
+
+function! g:ToggleTerm#TermSend(data)
+  if exists("t:tab_term_buf_name")
+    call chansend(t:tab_term_job_id, a:data)
+  endif
+endfunction
+
+function! g:ToggleTerm#TermSendReg(regname)
+  call g:ToggleTerm#TermSend(getreg(a:regname))
 endfunction
